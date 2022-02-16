@@ -1,1 +1,1 @@
-Nessa pasta nós armazenaremos os diagramas UML solicitados durantes as aulas.
+Nessa pasta armazenaremos os códigos desenvolvidos pelo nosso grupo.
