@@ -1,11 +1,13 @@
 # Laboratorio01
 
+Trabalho desenvolvido na disciplina Laboratório de Desenvolvimento de Software
+
 ## GRUPO:
 ### Edson Júnior Campolina Silva
 ### João Pedro Mayrink de Jesus
 ### Rodolfo Rocha Rodrigues
 
-Através desse projeto, nós desenvolveremos um Sistema de Matrículas de uma Universidade.
+Através desse projeto, nós desenvolveremos o Sistema de Matrículas de uma Universidade.
 
 # Histórias de usuário
 
