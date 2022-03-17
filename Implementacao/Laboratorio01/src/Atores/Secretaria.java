@@ -4,6 +4,10 @@ import Ensino.Disciplina;
 
 public class Secretaria extends Usuario {
 
+	public Secretaria(String nome, String senha, char tipo) {
+		super(nome, senha, tipo);
+	}
+
 	public void cadastrar(String nome, String senha) {
 		this.nome = nome;
 		this.senha = senha;

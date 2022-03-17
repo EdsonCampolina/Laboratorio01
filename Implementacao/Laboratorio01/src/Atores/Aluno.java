@@ -4,10 +4,8 @@ import Ensino.Curso;
 
 public class Aluno extends Usuario {
 
-	public void cadastrar(String nome, String senha) {
-		this.nome = nome;
-		this.senha = senha;
-		this.id = ++geradorID;
+	public Aluno(String nome, String senha, char tipo) {
+		super(nome, senha, tipo);
 	}
 	
 	public void matricular(Curso curso) {
@@ -17,4 +15,7 @@ public class Aluno extends Usuario {
 	public void recuperarSenha(String novaSenha) {
 
 	}
+
+	
+	
 }

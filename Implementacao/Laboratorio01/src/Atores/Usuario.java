@@ -6,11 +6,13 @@ public abstract class Usuario {
 	protected int id;
 	protected static int geradorID = 0;
 	protected String senha;
+	protected char tipo;
 
-	public void cadastrar(String nome, String senha) {
+	public Usuario(String nome, String senha, char tipo) {
 		this.nome = nome;
-		this.senha = senha;
 		this.id = ++geradorID;
+		this.senha = senha;
+		this.tipo = tipo;
 	}
 
 	public String getNome() {
@@ -23,10 +25,6 @@ public abstract class Usuario {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public static int getGeradorID() {
@@ -44,5 +42,7 @@ public abstract class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	
 
 }
