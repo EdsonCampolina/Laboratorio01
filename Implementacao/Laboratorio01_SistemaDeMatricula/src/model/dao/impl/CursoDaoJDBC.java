@@ -12,6 +12,7 @@ import db.DB;
 import db.DbException;
 import model.dao.CursoDao;
 import model.entities.Curso;
+import model.entities.Disciplina;
 
 public class CursoDaoJDBC implements CursoDao {
 
@@ -25,7 +26,8 @@ public class CursoDaoJDBC implements CursoDao {
 	public void insert(Curso obj) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("INSERT INTO tbcursos (Nome,Creditos,qntdDisciplinasObrigatorias, qntdDisciplinasOptativas) VALUES (?, ?, ?,?)",
+			st = conn.prepareStatement(
+					"INSERT INTO tbcursos (Nome,Creditos,qntdDisciplinasObrigatorias, qntdDisciplinasOptativas) VALUES (?, ?, ?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, obj.getNome());
 			st.setDouble(2, obj.getCreditos());
@@ -53,11 +55,38 @@ public class CursoDaoJDBC implements CursoDao {
 	}
 
 	@Override
+	public void insertDisciplina(Curso curso, Disciplina disciplina) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("INSERT INTO tbdisciplinacurso (IdDisciplina,IdCurso) VALUES (?, ?)");
+			st.setInt(1, disciplina.getId());
+			st.setInt(2, curso.getId());
+
+			int rowsAffected = st.executeUpdate();
+
+			if (rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				DB.closeResultSet(rs);
+			} else {
+				throw new DbException("Unexpected error! No rows affected!");
+			}
+		}
+
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
+
+	}
+
+	@Override
 	public void update(Curso obj) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("UPDATE tbcursos SET Nome = ? ,  Creditos = ?, qntdDisciplinasObrigatorias = ?, qntdDisciplinasOptativas = ? WHERE IdCurso = ?");
-			
+			st = conn.prepareStatement(
+					"UPDATE tbcursos SET Nome = ? ,  Creditos = ?, qntdDisciplinasObrigatorias = ?, qntdDisciplinasOptativas = ? WHERE IdCurso = ?");
+
 			st.setString(1, obj.getNome());
 			st.setDouble(2, obj.getCreditos());
 			st.setInt(3, obj.getQntdDisciplinasObrigatorias());
@@ -96,7 +125,7 @@ public class CursoDaoJDBC implements CursoDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement("SELECT * FROM department WHERE Id = ?");
+			st = conn.prepareStatement("SELECT * FROM tbcursos WHERE IdCurso = ?");
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if (rs.next()) {
@@ -134,15 +163,15 @@ public class CursoDaoJDBC implements CursoDao {
 		}
 	}
 
-	
-	/*METODOS DE INSTANCIAÇÃO
+	/*
+	 * METODOS DE INSTANCIAÇÃO
 	 * 
 	 * 
 	 * 
 	 * 
 	 * 
 	 */
-	
+
 	private Curso instantiateCurso(ResultSet rs) throws SQLException {
 		Curso curso = new Curso();
 		curso.setId(rs.getInt("IdCurso"));
@@ -152,5 +181,5 @@ public class CursoDaoJDBC implements CursoDao {
 		curso.setQntdDisciplinasOptativas(rs.getInt("qntdDisciplinasOptativas"));
 		return curso;
 	}
-	
+
 }

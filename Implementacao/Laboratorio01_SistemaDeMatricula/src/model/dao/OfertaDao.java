@@ -10,7 +10,11 @@ public interface OfertaDao {
 
 	void update(Oferta obj);
 
-	void deleteById(Integer id);
+	// void deleteById(Integer id);
+
+	void insertAluno(Integer idOferta, Integer idAluno);
+
+	void removeAluno(Integer idOferta, Integer idAluno);
 
 	Oferta findById(Integer id);
 

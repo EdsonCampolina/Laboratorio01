@@ -15,23 +15,20 @@ public class Matricula implements Serializable {
 	private boolean isAtiva = true;
 	private int anoMatricula;
 	private int semestreMatricula;
-	private Aluno aluno;
 
 	public Matricula() {
 
 	}
 
-	public Matricula(Curso curso, Aluno aluno, int anoMatricula, int semestreMatricula) {
+	public Matricula(Curso curso, int anoMatricula, int semestreMatricula) {
 		this.curso = curso;
-		this.aluno = aluno;
 		this.anoMatricula = anoMatricula;
 		this.semestreMatricula = semestreMatricula;
 	}
 
-	public Matricula(Curso curso, Aluno aluno, int anoMatricula, int semestreMatricula, boolean isAtiva, int Id,
+	public Matricula(Curso curso, int anoMatricula, int semestreMatricula, boolean isAtiva, int Id,
 			List<Oferta> ofertas) {
 		this.curso = curso;
-		this.aluno = aluno;
 		this.anoMatricula = anoMatricula;
 		this.semestreMatricula = semestreMatricula;
 		this.isAtiva = isAtiva;
@@ -87,17 +84,9 @@ public class Matricula implements Serializable {
 		this.semestreMatricula = semestreMatricula;
 	}
 
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id, aluno, anoMatricula, curso, isAtiva, ofertas, semestreMatricula);
+		return Objects.hash(Id, anoMatricula, curso, isAtiva, ofertas, semestreMatricula);
 	}
 
 	@Override
@@ -109,9 +98,9 @@ public class Matricula implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Matricula other = (Matricula) obj;
-		return Id == other.Id && Objects.equals(aluno, other.aluno) && anoMatricula == other.anoMatricula
-				&& Objects.equals(curso, other.curso) && isAtiva == other.isAtiva
-				&& Objects.equals(ofertas, other.ofertas) && semestreMatricula == other.semestreMatricula;
+		return Id == other.Id && anoMatricula == other.anoMatricula && Objects.equals(curso, other.curso)
+				&& isAtiva == other.isAtiva && Objects.equals(ofertas, other.ofertas)
+				&& semestreMatricula == other.semestreMatricula;
 	}
 
 }

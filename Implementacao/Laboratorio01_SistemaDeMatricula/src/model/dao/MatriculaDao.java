@@ -1,8 +1,7 @@
 package model.dao;
 
-import java.util.List;
-
 import model.entities.Matricula;
+import model.entities.Oferta;
 
 public interface MatriculaDao {
 
@@ -10,9 +9,11 @@ public interface MatriculaDao {
 
 	void update(Matricula obj);
 
-	void deleteById(Integer id);
+	//void deleteById(Integer id);
+	
+	void insertMatriculaOferta(Matricula obj, Oferta oferta);
 
 	Matricula findById(Integer id);
 
-	List<Matricula> findAll();
+	//List<Matricula> findAll();
 }

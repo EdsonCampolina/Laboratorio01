@@ -105,6 +105,11 @@ public class Oferta implements Serializable {
 		this.turno = turno;
 	}
 
+	
+	public void setMatriculasAbertas(boolean isMatriculasAbertas) {
+		this.isMatriculasAbertas = isMatriculasAbertas;
+	}
+
 	public boolean isMatriculasAbertas() {
 		return isMatriculasAbertas;
 	}
