@@ -6,7 +6,7 @@ import java.util.List;
 import model.dao.CursoDao;
 import model.entities.Curso;
 
-public class CursoDaoJDBC implements CursoDao{
+public class CursoDaoJDBC implements CursoDao {
 
 	private Connection conn;
 
@@ -17,19 +17,18 @@ public class CursoDaoJDBC implements CursoDao{
 	@Override
 	public void insert(Curso obj) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void update(Curso obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -43,6 +42,5 @@ public class CursoDaoJDBC implements CursoDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
 }
