@@ -55,6 +55,21 @@ public class Curso implements Serializable {
 		}
 		return "Não foi possível adicionar disciplina, esse curso já possui o número máximo de disciplinas optativas!";
 	}
+	public int getQntdDisciplinasObrigatorias() {
+		return qntdDisciplinasObrigatorias;
+	}
+
+	public void setQntdDisciplinasObrigatorias(int qntdDisciplinasObrigatorias) {
+		this.qntdDisciplinasObrigatorias = qntdDisciplinasObrigatorias;
+	}
+
+	public int getQntdDisciplinasOptativas() {
+		return qntdDisciplinasOptativas;
+	}
+
+	public void setQntdDisciplinasOptativas(int qntdDisciplinasOptativas) {
+		this.qntdDisciplinasOptativas = qntdDisciplinasOptativas;
+	}
 
 	public String getNome() {
 		return nome;
