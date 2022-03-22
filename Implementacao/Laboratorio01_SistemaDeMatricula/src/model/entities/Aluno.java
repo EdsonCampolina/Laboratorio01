@@ -17,10 +17,19 @@ public class Aluno extends Usuario {
 		super(nome, senha, Id);
 	}
 
+	public Aluno(String senha, int Id) {
+		super(senha, Id);
+	}
+
 	public Aluno(String nome, String senha, int Id, int IdMatricula) {
 		super(nome, senha, Id);
 		this.IdMatricula = IdMatricula;
 	}
+	public Aluno(int IdMatricula,String nome, String senha) {
+		super(nome, senha);
+		this.IdMatricula = IdMatricula;
+	}
+	
 
 	public int getIdMatricula() {
 		return IdMatricula;
@@ -30,9 +39,4 @@ public class Aluno extends Usuario {
 		IdMatricula = idMatricula;
 	}
 
-	
-
-	
-
-	
 }

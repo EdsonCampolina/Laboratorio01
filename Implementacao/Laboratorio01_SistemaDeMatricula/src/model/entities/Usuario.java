@@ -25,6 +25,11 @@ public class Usuario implements Serializable {
 		this.Id = Id;
 	}
 
+	public Usuario( String senha, int Id) {
+		this.senha = senha;
+		this.Id = Id;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

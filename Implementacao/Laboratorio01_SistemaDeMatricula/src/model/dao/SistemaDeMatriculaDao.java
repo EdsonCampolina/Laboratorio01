@@ -1,18 +1,21 @@
 package model.dao;
 
-import java.util.List;
-
-import model.entities.SistemaDeMatricula;
+import model.entities.Aluno;
+import model.entities.Professor;
+import model.entities.Secretaria;
 
 public interface SistemaDeMatriculaDao {
 
-	void insert(SistemaDeMatricula obj);
 
-	void update(SistemaDeMatricula obj);
+	Aluno Login(Aluno obj);
 
-	void deleteById(Integer id);
+	Professor Login(Professor obj);
 
-	SistemaDeMatricula findById(Integer id);
+	Secretaria Login(Secretaria obj);
 
-	List<SistemaDeMatricula> findAll();
+	void recuperarSenha(Aluno obj);
+
+	void recuperarSenha(Professor obj);
+
+	void recuperarSenha(Secretaria obj);
 }

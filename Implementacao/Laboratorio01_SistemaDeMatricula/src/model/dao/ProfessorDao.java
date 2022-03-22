@@ -15,4 +15,6 @@ public interface ProfessorDao {
 	Professor findById(Integer id);
 
 	List<Professor> findAll();
+	
+	void consultaAlunos(Professor professor);
 }

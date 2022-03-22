@@ -114,7 +114,7 @@ public class ProfessorDaoJDBC implements ProfessorDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement("SELECT * FROM tbcursos");
+			st = conn.prepareStatement("SELECT * FROM tbprofessores");
 			rs = st.executeQuery();
 			List<Professor> list = new ArrayList<>();
 			while (rs.next()) {
@@ -146,6 +146,34 @@ public class ProfessorDaoJDBC implements ProfessorDao {
 		obj.setNome(rs.getString("Nome"));
 		obj.setSenha(rs.getString("Senha"));
 		return obj;
+	}
+
+	@Override
+	public void consultaAlunos(Professor professor) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("select ta.Nome,tof.Turno,td.Nome as NomeDisciplina from tbprofessores tp "
+					+ "inner join tbofertas tof on tof.IdProfessor = tp.IdProfessor "
+					+ "inner join tbmatriculasofertas tmo on tmo.IdOferta = tof.IdDisciplina "
+					+ "inner join tbmatriculas tm on tm.IdMatricula = tmo.IdMatricula "
+					+ "inner join tbalunos ta on ta.IdMatricula = tm.IdMatricula "
+					+ "inner join tbdisciplinas td on td.IdDisciplina = tof.IdDisciplina "
+					+ "where tof.IdProfessor = ? " + " group by tm.IdMatricula;");
+			st.setInt(1, professor.getId());
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				System.out.println("Aluno :" + rs.getString("Nome") + " / Turno: " + rs.getString("Turno")
+						+ " / Disciplina : " + rs.getString("NomeDisciplina"));
+			}
+
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 }

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import model.dao.DaoFactory;
+import model.dao.MatriculaDao;
+
 public class Matricula implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +37,13 @@ public class Matricula implements Serializable {
 		this.isAtiva = isAtiva;
 		this.Id = Id;
 		this.ofertas = ofertas;
+	}
+
+	public void cancelarMatricula() {
+		this.isAtiva = false;
+		MatriculaDao matriculaDao = DaoFactory.createMatriculaDao();
+		matriculaDao.update(this);
+		System.out.println("Matrícula cancelada!");
 	}
 
 	public Curso getCurso() {

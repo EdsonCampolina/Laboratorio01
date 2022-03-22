@@ -15,4 +15,8 @@ public class Secretaria extends Usuario {
 	public Secretaria(String nome, String senha, int Id) {
 		super(nome, senha, Id);
 	}
+
+	public Secretaria(String senha, int Id) {
+		super( senha, Id);
+	}
 }

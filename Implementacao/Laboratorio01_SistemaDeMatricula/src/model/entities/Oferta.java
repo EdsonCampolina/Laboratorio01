@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import model.dao.DaoFactory;
+import model.dao.OfertaDao;
 import model.entities.enums.Turno;
 
 public class Oferta implements Serializable {
@@ -68,6 +70,8 @@ public class Oferta implements Serializable {
 		}
 		if (this.alunos.size() < MAX_ALUNOS) {
 			this.alunos.add(aluno);
+			OfertaDao ofertaDao = DaoFactory.createOfertaDao();
+			ofertaDao.insertAluno(this.Id, aluno.getId());
 			return "Aluno adicionado com sucesso!";
 		}
 		return "Aluno não foi inserido. Essa oferta já possui o número máximo de alunos!";
@@ -105,7 +109,6 @@ public class Oferta implements Serializable {
 		this.turno = turno;
 	}
 
-	
 	public void setMatriculasAbertas(boolean isMatriculasAbertas) {
 		this.isMatriculasAbertas = isMatriculasAbertas;
 	}
