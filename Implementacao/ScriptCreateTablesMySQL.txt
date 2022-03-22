@@ -1,0 +1,100 @@
+CREATE TABLE tbCursos (
+  IdCurso int NOT NULL AUTO_INCREMENT,
+  Nome varchar(60) DEFAULT NULL,
+  Creditos double NOT NULL,
+  PRIMARY KEY (IdCurso)
+);
+
+CREATE TABLE tbDisciplinas(
+  IdDisciplina int NOT NULL AUTO_INCREMENT,
+  Nome varchar(60) DEFAULT NULL,
+  Obrigatoria boolean DEFAULT NULL,
+  PRIMARY KEY (IdDisciplina)
+);
+
+CREATE TABLE tbDisciplinaCurso(
+   IdDisciplina int NOT NULL ,
+   IdCurso int NOT NULL ,
+   FOREIGN KEY (IdDisciplina) REFERENCES tbDisciplinas (IdDisciplina),
+   FOREIGN KEY (IdCurso) REFERENCES tbCursos (IdCurso)
+);
+
+CREATE TABLE tbProfessores(
+   IdProfessor int NOT NULL AUTO_INCREMENT,
+   Nome varchar(60) DEFAULT NULL,
+   Senha varchar(60) DEFAULT NULL,
+   PRIMARY KEY (IdProfessor) 
+);
+
+CREATE TABLE tbSecretaria(
+   IdSecretaria int NOT NULL AUTO_INCREMENT,
+   Nome varchar(60) DEFAULT NULL,
+   Senha varchar(60) DEFAULT NULL,
+   PRIMARY KEY (IdSecretaria) 
+);
+
+CREATE TABLE tbOfertas(
+   IdOferta int NOT NULL AUTO_INCREMENT,
+   IdProfessor int NOT NULL,
+   IdDisciplina int NOT NULL,
+   Turno varchar(15) DEFAULT NULL,
+   AlunosMatriculados int DEFAULT NULL,
+   AnoOferta int NOT NULL,
+   SemestreOferta int NOT NULL,
+   PRIMARY KEY (IdOferta),
+   FOREIGN KEY (IdProfessor) REFERENCES tbProfessores (IdProfessor),
+   FOREIGN KEY (IdDisciplina) REFERENCES tbDisciplinas (IdDisciplina)
+);
+
+CREATE TABLE tbMatriculas(
+     IdMatricula int NOT NULL AUTO_INCREMENT,
+     IdCurso int NOT NULL,
+     Ativa boolean DEFAULT NULL,
+     SemestreMatricula int,
+     AnoMatricula int,
+     PRIMARY KEY (IdMatricula)
+);
+
+CREATE TABLE tbMatriculasOfertas(
+     IdMatricula int NOT NULL,
+     IdOferta int NOT NULL,
+     FOREIGN KEY (IdMatricula) REFERENCES tbMatriculas (IdMatricula),
+     FOREIGN KEY (IdOferta) REFERENCES tbOfertas (IdOferta)
+);
+
+CREATE TABLE tbAlunos(
+   IdAluno int NOT NULL AUTO_INCREMENT,
+   IdMatricula int NOT NULL,
+   Nome varchar(60) DEFAULT NULL,
+   Senha varchar(60) DEFAULT NULL,
+   PRIMARY KEY (IdAluno),
+   FOREIGN KEY (IdMatricula) REFERENCES tbMatriculas (IdMatricula)
+);
+
+
+
+ALTER TABLE tbcursos
+ADD qntdDisciplinasObrigatorias int;
+
+ALTER TABLE tbcursos
+ADD qntdDisciplinasOptativas int;
+
+ALTER TABLE tbofertas 
+ADD MatriculasAbertas boolean ;
+
+ALTER TABLE tbofertas
+ADD OfertaCancelada boolean;
+
+ALTER TABLE tbmatriculas
+ADD AnoMatricula int NOT NULL;
+
+ALTER TABLE tbmatriculas
+ADD SemestreMatricula int NOT NULL;
+
+ALTER TABLE tbmatriculas
+DROP DataMatricula;
+
+ALTER TABLE tbofertas
+DROP AlunosMatriculados;
+
+
